@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os 
 
 df = pd.read_csv('flows.csv')
 
@@ -89,14 +90,10 @@ def flowSpeed():
     plt.show()
 
 def flag_count():
-    # Wybierz konkretne kolumny
-    wybrane_kolumny = ['fwd_psh_flags', 'bwd_psh_flags', 'fwd_urg_flags', 'bwd_urg_flags', 'fin_flag_cnt', 'syn_flag_cnt', 'rst_flag_cnt', 'psh_flag_cnt', 'ack_flag_cnt', 'urg_flag_cnt', 'ece_flag_cnt']
-
-    # Oblicz sumę dla wybranych kolumn
-    sumy_kolumn = df[wybrane_kolumny].sum()
-
-    # Generuj wykres słupkowy
-    plt.bar(sumy_kolumn.index, sumy_kolumn.values)
+    plt.figure(figsize=(14, 5))
+    choosen_cols = ['fwd_psh_flags', 'bwd_psh_flags', 'fwd_urg_flags', 'bwd_urg_flags', 'fin_flag_cnt', 'syn_flag_cnt', 'rst_flag_cnt', 'psh_flag_cnt', 'ack_flag_cnt', 'urg_flag_cnt', 'ece_flag_cnt']
+    col_sum = df[choosen_cols].sum()
+    plt.bar(col_sum.index, col_sum.values)
     plt.xlabel('Flag name')
     plt.ylabel('Sum')
     plt.title('Sums of flags')
@@ -104,14 +101,50 @@ def flag_count():
 
 def flowPkt():
     plt.plot(df['flow_pkts_s'], marker='o')
-    plt.xlabel('Indeks połączenia')
+    plt.xlabel('Connection index')
     plt.ylabel('Connection speed [packets/s]')
     plt.title('Connection speed per connection')   
+    plt.show()
+
+def maxPkt():
+    plt.plot(df['pkt_len_max'], marker='o')
+    plt.xlabel('Connection index')
+    plt.ylabel('Length of packet in IP header')
+    plt.title('Maximal lenght of packet per connection')   
+    plt.show()
+
+def minPkt():
+    plt.plot(df['pkt_len_min'], marker='o')
+    plt.xlabel('Connection index')
+    plt.ylabel('Length of packet in IP header')
+    plt.title('Minimal lenght of packet per connection')   
+    plt.show()
+
+def avgPkt():
+    plt.plot(df['pkt_len_mean'], marker='o')
+    plt.xlabel('Connection index')
+    plt.ylabel('Length of packet in IP header')
+    plt.title('Averege lenght of packet per connection')   
+    plt.show()
+
+def stdPkt():
+    plt.plot(df['pkt_len_mean'], marker='o')
+    plt.xlabel('Connection index')
+    plt.ylabel('Length of packet in IP header')
+    plt.title('Standard Deviation of Packet Length')   
+    plt.show()
+
+def varPkt():
+    plt.plot(df['pkt_len_mean'], marker='o')
+    plt.xlabel('Connection index')
+    plt.ylabel('Length of packet in IP header')
+    plt.title('Variance of Packet Length')   
     plt.show()
 
 
 
 while True:
+    os.system("cls")
     print("Which graph you would like to see?")
     print("1. Source IP graph")
     print("2. Destiation IP graph")
@@ -122,7 +155,12 @@ while True:
     print("7. Time of connection in ms")
     print("8. Speed of connection in kbytes/s")
     print("9. Speed of connection in packet/s")
-    print("10. Count of tcp flags in capture")
+    print("10. Maximal lenght of packet per connection")
+    print("11. Minimal lenght of packet per connection")
+    print("12. Averege lenght of packet per connection")
+    print("13. Standard Deviation of Packet Length")
+    print("14. Variance of Packet Length ")
+    print("15. Count of tcp flags in capture")
     print("Type anything to exit the program")
     x = input("Please insert number: ")
     if (int(x) == 1):
@@ -144,6 +182,16 @@ while True:
     elif(int(x) == 9 ):
         flowPkt() 
     elif(int(x) == 10): 
+        maxPkt()
+    elif(int(x) == 11): 
+        minPkt()
+    elif(int(x) == 12): 
+        avgPkt()
+    elif(int(x) == 13): 
+        stdPkt()
+    elif(int(x) == 14): 
+        varPkt()
+    elif(int(x) == 15):
         flag_count()
     else:
         break
