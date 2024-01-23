@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import os 
+import os
+import platform
 
 df = pd.read_csv('flows.csv')
 
@@ -141,10 +142,32 @@ def varPkt():
     plt.title('Variance of Packet Length')   
     plt.show()
 
+def subflow_forward():
+    subflow_forward = df['subflow_fwd_byts'] / 1024
+    plt.plot(subflow_forward, marker='o')
+    plt.xlabel('Subflow index')
+    plt.ylabel('Subflow forward speed [kilobytes/s]')
+    plt.title('Subflow forward speed per connection')   
+    plt.show()
+
+
+def subflow_backward():
+    subflow_backward = df['subflow_bwd_byts'] / 1024
+    plt.plot(subflow_backward, marker='o')
+    plt.xlabel('Subflow index')
+    plt.ylabel('Subflow response speed [kilobytes/s]')
+    plt.title('Subflow response speed per connection')   
+    plt.show()
+
+
 
 
 while True:
-    os.system("cls")
+    if(platform.system() == "Windows"):
+        os.system("cls")
+    else:
+        os.system("clear")
+
     print("Which graph you would like to see?")
     print("1. Source IP graph")
     print("2. Destiation IP graph")
@@ -161,6 +184,8 @@ while True:
     print("13. Standard Deviation of Packet Length")
     print("14. Variance of Packet Length ")
     print("15. Count of tcp flags in capture")
+    print("16. Speed of subflow forward in kbytes/s")
+    print("17. Speed of subflow response in kbytes/s")
     print("Type anything to exit the program")
     x = input("Please insert number: ")
     if (int(x) == 1):
@@ -193,6 +218,10 @@ while True:
         varPkt()
     elif(int(x) == 15):
         flag_count()
+    elif(int(x) == 16): 
+        subflow_forward()
+    elif(int(x) == 17):
+        subflow_backward()
     else:
         break
 
