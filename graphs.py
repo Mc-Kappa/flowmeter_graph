@@ -8,7 +8,7 @@ def srcIP():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('IP address')
-    plt.ylabel('Connections count')
+    plt.ylabel('Connection count')
     plt.title('Count of ergress connections per IP')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -20,7 +20,7 @@ def destIP():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('IP address')
-    plt.ylabel('Connections count')
+    plt.ylabel('Connection count')
     plt.title('Count of ingress connections per IP')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -31,7 +31,7 @@ def srcPort():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('Port number')
-    plt.ylabel('Connections count')
+    plt.ylabel('Connection count')
     plt.title('Count of ergress connections per port')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -42,7 +42,7 @@ def destPort():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('Port number')
-    plt.ylabel('Connections count')
+    plt.ylabel('Connection count')
     plt.title('Count of ingress connections per port')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -53,7 +53,7 @@ def srcMac():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('Mac address')
-    plt.ylabel('Connections count')
+    plt.ylabel('Connection count')
     plt.title('Count of ingress connections per mac address')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
@@ -64,8 +64,8 @@ def destMac():
     plt.figure(figsize=(10, 6))
     plt.bar(counts.index.astype(str), counts.values, color='lightblue')
     plt.xlabel('Port number')
-    plt.ylabel('Connections count')
-    plt.title('Count of ingress connections per port')
+    plt.ylabel('Connection count')
+    plt.title('Count of ingress connections per mac address')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
@@ -74,16 +74,16 @@ def flowDur():
     df['flow_duration_ms'] = df['flow_duration'] / 1000
     # Ustawienia wykresu
     plt.plot(df['flow_duration_ms'], marker='o')
-    plt.xlabel('Indeks połączenia')
+    plt.xlabel('Connection index')
     plt.ylabel('Connection lenght (ms)')
-    plt.title('Czas trwania połączenia dla różnych indeksów')   
+    plt.title('Time of connection per connection')   
     plt.show()
 
-def flowPkt():
+def flowSpeed():
     df['flow_kbyts_s'] = df['flow_byts_s'] / 1024
     # Ustawienia wykresu
     plt.plot(df['flow_kbyts_s'], marker='o')
-    plt.xlabel('Indeks połączenia')
+    plt.xlabel('Connection index')
     plt.ylabel('Connection speed [kilobytes/s]')
     plt.title('Connection speed per connection')   
     plt.show()
@@ -102,6 +102,14 @@ def flag_count():
     plt.title('Sums of flags')
     plt.show()
 
+def flowPkt():
+    plt.plot(df['flow_pkts_s'], marker='o')
+    plt.xlabel('Indeks połączenia')
+    plt.ylabel('Connection speed [packets/s]')
+    plt.title('Connection speed per connection')   
+    plt.show()
+
+
 
 while True:
     print("Which graph you would like to see?")
@@ -111,9 +119,10 @@ while True:
     print("4. Destiation port graph")
     print("5. Source mac adress graph")
     print("6. Destiation mac adress graph")
-    print("7. Destiation time of connection in ms")
+    print("7. Time of connection in ms")
     print("8. Speed of connection in kbytes/s")
-    print("9. Count of tcp flags in capture")
+    print("9. Speed of connection in packet/s")
+    print("10. Count of tcp flags in capture")
     print("Type anything to exit the program")
     x = input("Please insert number: ")
     if (int(x) == 1):
@@ -131,8 +140,10 @@ while True:
     elif(int(x) == 7): 
         flowDur()
     elif(int(x) == 8): 
-        flowPkt()
-    elif(int(x) == 9): 
+        flowSpeed()
+    elif(int(x) == 9 ):
+        flowPkt() 
+    elif(int(x) == 10): 
         flag_count()
     else:
         break
