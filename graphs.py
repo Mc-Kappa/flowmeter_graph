@@ -159,6 +159,20 @@ def subflow_backward():
     plt.title('Subflow response speed per connection')   
     plt.show()
 
+def subflow_packets_forward():
+    plt.plot(df['subflow_fwd_pkts'], marker='o')
+    plt.xlabel('Subflow index')
+    plt.ylabel('Length of subflow packet forwarded')
+    plt.title('Average length of subflow packet forwarded')   
+    plt.show()
+
+def subflow_packets_backward():
+    plt.plot(df['subflow_bwd_pkts'], marker='o')
+    plt.xlabel('Subflow index')
+    plt.ylabel('Length of subflow packet backwarded')
+    plt.title('Average length of subflow packet backwarder')   
+    plt.show()
+
 
 
 
@@ -186,6 +200,8 @@ while True:
     print("15. Count of tcp flags in capture")
     print("16. Speed of subflow forward in kbytes/s")
     print("17. Speed of subflow response in kbytes/s")
+    print("18. Average length of subflow packet forwarded")
+    print("19. Average length of subflow packet backwarded")
     print("Type anything to exit the program")
     x = input("Please insert number: ")
     if (int(x) == 1):
@@ -222,6 +238,10 @@ while True:
         subflow_forward()
     elif(int(x) == 17):
         subflow_backward()
+    elif(int(x) == 18): 
+        subflow_packets_forward()
+    elif(int(x) == 19):
+        subflow_packets_backward()
     else:
         break
 
