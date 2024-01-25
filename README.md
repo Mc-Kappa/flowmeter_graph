@@ -10,7 +10,7 @@ How to use?
 1. Collect data with tcp dump or wireshark (it has to be in .pcap format)
 2. Prepare .csv with cic flowmeter:
    - cicflowmeter -f example.pcap -c flows.csv
-3. run out script with python graphs.py file_name.csv
+3. run our script with python graphs.py file_name.csv
 
 Enjoy beautyful graphs.
 
