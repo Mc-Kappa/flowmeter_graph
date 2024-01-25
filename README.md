@@ -1,10 +1,10 @@
 How to run?
 Download repo with CiC flow meter: https://gitlab.com/hieulw/cicflowmeter and install
 
-git clone https://gitlab.com/hieulw/cicflowmeter
-cd cicflowmeter
-python setup.py install
-pip install pandas matpotlib
+- git clone https://gitlab.com/hieulw/cicflowmeter
+- cd cicflowmeter
+- python setup.py install
+- pip install pandas matpotlib
 
 How to use?
 1. Collect data with tcp dump or wireshark (it has to be in .pcap format)
