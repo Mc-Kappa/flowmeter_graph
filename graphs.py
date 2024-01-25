@@ -2,8 +2,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import platform
+import sys
 
-df = pd.read_csv('flows.csv')
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python test.py <filename>")
+        exit()
+    else:
+        filename = sys.argv[1]
+
+
+df = pd.read_csv(filename)
 
 def srcIP():
     counts = df['src_ip'].value_counts()
